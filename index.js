@@ -1,4 +1,38 @@
-let myLibrary = ["The Hobbit", "Potato"];
+// Example Books
+const theHobbit = new Book(
+	"The Hobbit",
+	"J.R.R. Tolkien",
+	"295",
+	"not read yet"
+);
+
+const harryPotter = new Book("Harry Potter", "J.K. Rowling", "362", "read");
+
+const swallowsAndAmazons = new Book(
+	"Swallows and Amazons",
+	"Arthur Ransome",
+	"527",
+	"not read yet"
+);
+
+const alexRider = new Book("Alex Rider", "Anthony Horowitz", "120", "read");
+
+const toSleepInASeaOfStars = new Book(
+	"To Sleep in a Sea of Stars",
+	"Christopher Paolini",
+	"880",
+	"read"
+);
+
+// Actual Code
+
+let myLibrary = [
+	toSleepInASeaOfStars,
+	alexRider,
+	harryPotter,
+	swallowsAndAmazons,
+	theHobbit,
+];
 
 function Book(title, author, pages, read) {
 	this.title = title;
@@ -14,47 +48,17 @@ function addBookToLibrary(newbook) {
 	myLibrary.push(newbook);
 }
 
-function displayBook() {
+function collectBook() {
 	myLibrary.forEach((element) => {
-		console.log("There is a book!");
-		return;
+		console.log(element.info());
+		displayBook(element);
 	});
 }
 
-
-const theHobbit = new Book(
-	"The Hobbit",
-	"J.R.R. Tolkien",
-	"295",
-	"not read yet"
-);
-
-const harryPotter = new Book(
-	"Harry Potter",
-	"J.K. Rowling",
-	"362",
-	"read"
-);
-
-const swallowsAndAmazons = new Book(
-	"Swallows and Amazons",
-	"Arthur Ransome",
-	"527",
-	"not read yet"
-);
-
-const alexRider = new Book(
-	"Alex Rider",
-	"Anthony Horowitz",
-	"120",
-	"read"
-);
-
-const theHobbit = new Book(
-	"The Hobbit",
-	"J.R.R. Tolkien",
-	"295",
-	"not read yet"
-);
-
-// console.log(theHobbit.info());
+function displayBook(element) {
+	let bookCard = document.createElement("div");
+	let bookInfo = document.createTextNode(element.info());
+	bookCard.appendChild(bookInfo);
+	let bookGrid = document.getElementById("bookGrid")
+	bookGrid.appendChild(bookCard);
+}
