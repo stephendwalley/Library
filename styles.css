@@ -1,0 +1,13 @@
+#bookGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: auto;
+    grid-gap: 5px;
+    padding-top: 20px;
+}
+
+.book {
+    padding: 20px;
+    border: 2px solid;
+    border-radius: 10%;
+}
