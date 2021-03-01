@@ -57,8 +57,28 @@ function collectBook() {
 
 function displayBook(element) {
 	let bookCard = document.createElement("div");
-	let bookInfo = document.createTextNode(element.info());
-	bookCard.appendChild(bookInfo);
+	bookCard.classList.add("book")
+
+	let bookTitle = document.createElement("div");
+	bookTitle.textContent = element.title;
+	bookTitle.classList.add("bookTitle");
+	bookCard.appendChild(bookTitle);
+
+	let bookAuthor = document.createElement("div");
+	bookAuthor.textContent = element.author;
+	bookAuthor.classList.add("bookAuthor");
+	bookCard.appendChild(bookAuthor);
+
+	let bookPages = document.createElement("div");
+	bookPages.textContent = element.pages;
+	bookPages.classList.add("bookPages");
+	bookCard.appendChild(bookPages);
+
+	let bookRead = document.createElement("div");
+	bookRead.textContent = element.read;
+	bookRead.classList.add("bookRead");
+	bookCard.appendChild(bookRead);
+
 	let bookGrid = document.getElementById("bookGrid")
 	bookGrid.appendChild(bookCard);
 }
