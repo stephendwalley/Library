@@ -55,30 +55,68 @@ function collectBook() {
 	});
 }
 
-function displayBook(element) {
-	let bookCard = document.createElement("div");
-	bookCard.classList.add("book")
+function displayBook() {
+	myLibrary.forEach((element, index) => {
+		let bookCard = document.createElement("div");
+		bookCard.classList.add("book");
+		bookCard.dataset.bookIndex = `${index}`
+		
+		let bookTitle = document.createElement("div");
+		bookTitle.textContent = element.title;
+		bookTitle.classList.add("bookTitle");
+		bookCard.appendChild(bookTitle);
 
-	let bookTitle = document.createElement("div");
-	bookTitle.textContent = element.title;
-	bookTitle.classList.add("bookTitle");
-	bookCard.appendChild(bookTitle);
+		let bookAuthor = document.createElement("div");
+		bookAuthor.textContent = element.author;
+		bookAuthor.classList.add("bookAuthor");
+		bookCard.appendChild(bookAuthor);
 
-	let bookAuthor = document.createElement("div");
-	bookAuthor.textContent = element.author;
-	bookAuthor.classList.add("bookAuthor");
-	bookCard.appendChild(bookAuthor);
+		let bookPages = document.createElement("div");
+		bookPages.textContent = element.pages;
+		bookPages.classList.add("bookPages");
+		bookCard.appendChild(bookPages);
 
-	let bookPages = document.createElement("div");
-	bookPages.textContent = element.pages;
-	bookPages.classList.add("bookPages");
-	bookCard.appendChild(bookPages);
+		let bookRead = document.createElement("div");
+		bookRead.textContent = element.read;
+		bookRead.classList.add("bookRead");
+		bookCard.appendChild(bookRead);
 
-	let bookRead = document.createElement("div");
-	bookRead.textContent = element.read;
-	bookRead.classList.add("bookRead");
-	bookCard.appendChild(bookRead);
+		let bookRemove = document.createElement("button");
+		bookRemove.textContent = "Remove Book";
+		bookCard.appendChild(bookRemove)
 
-	let bookGrid = document.getElementById("bookGrid")
-	bookGrid.appendChild(bookCard);
+		let bookGrid = document.getElementById("bookGrid");
+		bookGrid.appendChild(bookCard);
+	});
+}
+
+let newBook = document.getElementById("newBook");
+newBook.addEventListener("click", newBookInput);
+
+function newBookInput() {
+	console.log("newBookPressed")
+	let newBookForm = document.getElementById("newBookForm");
+	newBookForm.innerHTML = (`
+		<div>	
+			<label for="title">Title</label>
+			<input type = "text" id = "title">
+		</div>
+		<div>
+			<label for="author">Author</label>
+			<input type="text" id="author">
+		</div>
+		<div>
+			<label for="pages">Number of Pages</label>
+			<input type="text" id="pages">
+		</div>
+			
+		<div>
+			<p>Have you read this book yet?</p>
+				<input type = "radio" id = "read"  value="read" name = "readStatus" checked><label for="read">Read</label>
+
+				<input type = "radio" id = "notRead" value = "notRead" name = "readStatus"><label for="notRead">Not Read</label>
+				
+				<button type = "submit">Add Book</button>
+		</div>
+		`)
 }
