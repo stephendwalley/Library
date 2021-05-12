@@ -32,6 +32,21 @@ let newBook = document.getElementById("newBook");
 newBook.addEventListener("click", newBookInput);
 
 
+
+Book.prototype.toggleReadStatus = function() {
+	console.log("changing read status")
+	console.log(this.read)
+	if (this.read == "read") {
+		this.read == "not read yet";
+		console.log("it has been read")
+		console.log(this.read)
+	} else {
+		this.read = "read";
+		console.log(this.read)
+	}
+}
+
+
 // Normal Code
 
 let myLibrary = [
@@ -102,6 +117,15 @@ function displayBook() {
 			displayBook();
 		})
 
+		let bookReadBtn = document.createElement("button");	
+		bookReadBtn.textContent = "Change Read Status"
+		bookCard.appendChild(bookReadBtn)
+		bookReadBtn.addEventListener("click", function(){
+			console.log("change read status")
+			let bookIndex = bookCard.dataset.bookIndex;
+			myLibrary[bookIndex].toggleReadStatus();
+		})
+
 		
 		bookGrid.appendChild(bookCard);
 	});
@@ -136,6 +160,5 @@ function newBookInput() {
 		`)
 }
 
-function toggleReadStatus() {
-	
-}
+
+
