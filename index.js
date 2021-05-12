@@ -26,6 +26,14 @@ const toSleepInASeaOfStars = new Book(
 
 // Actual Code
 
+
+// GLOBAL Code
+let newBook = document.getElementById("newBook");
+newBook.addEventListener("click", newBookInput);
+
+
+// Normal Code
+
 let myLibrary = [
 	toSleepInASeaOfStars,
 	alexRider,
@@ -56,10 +64,13 @@ function collectBook() {
 }
 
 function displayBook() {
+	let bookGrid = document.getElementById("bookGrid");
+	bookGrid.innerHTML = "";
+
 	myLibrary.forEach((element, index) => {
 		let bookCard = document.createElement("div");
 		bookCard.classList.add("book");
-		bookCard.dataset.bookIndex = `${index}`
+		
 		
 		let bookTitle = document.createElement("div");
 		bookTitle.textContent = element.title;
@@ -84,14 +95,18 @@ function displayBook() {
 		let bookRemove = document.createElement("button");
 		bookRemove.textContent = "Remove Book";
 		bookCard.appendChild(bookRemove)
+		bookCard.dataset.bookIndex = `${index}`
+		bookRemove.addEventListener("click", function(){
+			let bookIndex = bookCard.dataset.bookIndex;
+			myLibrary.splice(bookIndex, 1);
+			displayBook();
+		})
 
-		let bookGrid = document.getElementById("bookGrid");
+		
 		bookGrid.appendChild(bookCard);
 	});
 }
 
-let newBook = document.getElementById("newBook");
-newBook.addEventListener("click", newBookInput);
 
 function newBookInput() {
 	console.log("newBookPressed")
@@ -119,4 +134,8 @@ function newBookInput() {
 				<button type = "submit">Add Book</button>
 		</div>
 		`)
+}
+
+function toggleReadStatus() {
+	
 }
