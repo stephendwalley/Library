@@ -34,15 +34,12 @@ newBook.addEventListener("click", newBookInput);
 
 
 Book.prototype.toggleReadStatus = function() {
-	console.log("changing read status")
-	console.log(this.read)
 	if (this.read == "read") {
-		this.read == "not read yet";
-		console.log("it has been read")
-		console.log(this.read)
+		this.read = "not ready yet"
+		displayBook();
 	} else {
 		this.read = "read";
-		console.log(this.read)
+		displayBook()
 	}
 }
 
@@ -162,3 +159,6 @@ function newBookInput() {
 
 
 
+window.onload = function() {
+	displayBook();
+}
