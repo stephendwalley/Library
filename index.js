@@ -26,23 +26,20 @@ const toSleepInASeaOfStars = new Book(
 
 // Actual Code
 
-
 // GLOBAL Code
 let newBook = document.getElementById("newBook");
 newBook.addEventListener("click", newBookInput);
 
 
-
-Book.prototype.toggleReadStatus = function() {
+Book.prototype.toggleReadStatus = function () {
 	if (this.read == "read") {
-		this.read = "not ready yet"
+		this.read = "not ready yet";
 		displayBook();
 	} else {
 		this.read = "read";
-		displayBook()
+		displayBook();
 	}
-}
-
+};
 
 // Normal Code
 
@@ -64,16 +61,6 @@ function Book(title, author, pages, read) {
 	};
 }
 
-function addBookToLibrary(newbook) {
-	myLibrary.push(newbook);
-}
-
-function collectBook() {
-	myLibrary.forEach((element) => {
-		console.log(element.info());
-		displayBook(element);
-	});
-}
 
 function displayBook() {
 	let bookGrid = document.getElementById("bookGrid");
@@ -82,8 +69,7 @@ function displayBook() {
 	myLibrary.forEach((element, index) => {
 		let bookCard = document.createElement("div");
 		bookCard.classList.add("book");
-		
-		
+
 		let bookTitle = document.createElement("div");
 		bookTitle.textContent = element.title;
 		bookTitle.classList.add("bookTitle");
@@ -106,36 +92,33 @@ function displayBook() {
 
 		let bookRemove = document.createElement("button");
 		bookRemove.textContent = "Remove Book";
-		bookCard.appendChild(bookRemove)
-		bookCard.dataset.bookIndex = `${index}`
-		bookRemove.addEventListener("click", function(){
+		bookCard.appendChild(bookRemove);
+		bookCard.dataset.bookIndex = `${index}`;
+		bookRemove.addEventListener("click", function () {
 			let bookIndex = bookCard.dataset.bookIndex;
 			myLibrary.splice(bookIndex, 1);
 			displayBook();
-		})
+		});
 
-		let bookReadBtn = document.createElement("button");	
-		bookReadBtn.textContent = "Change Read Status"
-		bookCard.appendChild(bookReadBtn)
-		bookReadBtn.addEventListener("click", function(){
-			console.log("change read status")
+		let bookReadBtn = document.createElement("button");
+		bookReadBtn.textContent = "Change Read Status";
+		bookCard.appendChild(bookReadBtn);
+		bookReadBtn.addEventListener("click", function () {
+			console.log("change read status");
 			let bookIndex = bookCard.dataset.bookIndex;
 			myLibrary[bookIndex].toggleReadStatus();
-		})
+		});
 
-		
 		bookGrid.appendChild(bookCard);
 	});
 }
 
-
 function newBookInput() {
-	console.log("newBookPressed")
 	let newBookForm = document.getElementById("newBookForm");
-	newBookForm.innerHTML = (`
+	newBookForm.innerHTML = `
 		<div>	
 			<label for="title">Title</label>
-			<input type = "text" id = "title">
+			<input type = "text" id = "bookTitle">
 		</div>
 		<div>
 			<label for="author">Author</label>
@@ -152,13 +135,33 @@ function newBookInput() {
 
 				<input type = "radio" id = "notRead" value = "notRead" name = "readStatus"><label for="notRead">Not Read</label>
 				
-				<button type = "submit">Add Book</button>
+				<button type = "submit" onclick = "addBookToLibrary();" >Add Book</button>
 		</div>
-		`)
+		`;
 }
 
 
+function addBookToLibrary() {
+	document.getElementById("bookTitle").value = title;
+	document.getElementById("author").value = author;
+	document.getElementById("pages").value = pages;
+	// checkReadInput();
+	console.log(title, author, pages)
+	let newBook = new Book(title, author, pages, read);
+	myLibrary.push(newBook);
+}
 
-window.onload = function() {
+
+function checkReadInput() {
+	if ((document.getElementById("read").checked = true)) {
+		console.log("read check read input");
+		return "read";
+	} else if ((document.getElementById("notRead").checked = true)) {
+		console.log("not read chekc read input");
+		return "not read yet";
+	}
+}
+
+window.onload = function () {
 	displayBook();
-}
+};
