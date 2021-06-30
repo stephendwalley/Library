@@ -140,23 +140,24 @@ function newBookInput() {
 		`;
 }
 
-
 function addBookToLibrary() {
-	document.getElementById("bookTitle").value = title;
-	document.getElementById("author").value = author;
-	document.getElementById("pages").value = pages;
-	// checkReadInput();
-	console.log(title, author, pages)
+	console.log("add book")
+	let title = document.getElementById("bookTitle").value;
+	let author = document.getElementById("author").value
+	let pages = document.getElementById("pages").value;
+	let read = checkReadInput();
+	console.log(title, author, pages, read)
 	let newBook = new Book(title, author, pages, read);
 	myLibrary.push(newBook);
+	displayBook();
 }
 
 
 function checkReadInput() {
-	if ((document.getElementById("read").checked = true)) {
+	if ((document.getElementById("read").checked == true)) {
 		console.log("read check read input");
 		return "read";
-	} else if ((document.getElementById("notRead").checked = true)) {
+	} else if ((document.getElementById("notRead").checked == true)) {
 		console.log("not read chekc read input");
 		return "not read yet";
 	}
